@@ -46,6 +46,7 @@ rm -f %{buildroot}/etc/serviceslint
 rm -f %{buildroot}/etc/uidgidlint
 rm -f %{buildroot}/etc/shadowconvert.sh
 rm -f %{buildroot}/etc/setup.spec
+rm -f %{buildroot}/etc/packaging
 
 #mkdir -p %{buildroot}/opt/etc
 #mv %{buildroot}/etc/{passwd,group,shadow,gshadow} %{buildroot}/opt/etc
