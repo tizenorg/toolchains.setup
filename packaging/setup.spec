@@ -6,6 +6,7 @@ License: Public Domain
 Group: System/Base
 URL: https://fedorahosted.org/setup/
 Source0: https://fedorahosted.org/releases/s/e/%{name}/%{name}-0.1.tar.bz2
+Source1001: packaging/setup.manifest 
 BuildArch: noarch
 BuildRequires: bash
 Requires: filesystem
@@ -20,6 +21,7 @@ setup files, such as passwd, group, and profile.
 ./shadowconvert.sh
 
 %build
+cp %{SOURCE1001} .
 
 %check
 # Run any sanity checks.
@@ -69,6 +71,7 @@ rm -rf %{buildroot}
 #end
 
 %files
+%manifest setup.manifest
 %defattr(-,root,root,-)
 #/etc/passwd
 #/etc/group
