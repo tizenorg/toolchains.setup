@@ -37,7 +37,7 @@ games:*:60:
 man:*:62:
 users:*:100:
 ntp:*:102:
-messagebus:!:103:
+dbus:!:103:
 ntp:!:104:
 nogroup:*:65534:
 app:x:5000:
