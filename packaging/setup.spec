@@ -58,7 +58,7 @@ for i, name in ipairs({"passwd", "shadow", "group", "gshadow"}) do
 end
 
 %files
-%manifest setup.manifest
+%manifest /etc/setup.manifest
 %defattr(-,root,root,-)
 %verify(not md5 size mtime) %config(noreplace) /etc/passwd
 %verify(not md5 size mtime) %config(noreplace) /etc/group
