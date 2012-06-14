@@ -1,3 +1,6 @@
+* Thu Jun 14 2011 Prajwal Mohan <prajwal.karur.mohan@intel.com> - 2.8.15
+- remove messgaebus user
+
 * Wed Jun 01 2011 Marko Saukko <marko.saukko@cybercom.com> - 2.8.15
 - Add ttyO2 to setup-2.8.9-securetty.patch (used in N900 for example)
 
