@@ -1,15 +1,15 @@
 Summary: A set of system configuration and setup files
 Name: setup
-Version: 0.1
+Version: 0.4
 Release: 1
 License: Public Domain
 Group: System/Base
 URL: https://fedorahosted.org/setup/
-Source0: https://fedorahosted.org/releases/s/e/%{name}/%{name}-0.1.tar.bz2
+Source0: %{name}-%{version}.tar.bz2
 Source1001: packaging/setup.manifest 
 BuildArch: noarch
 BuildRequires: bash
-Requires: filesystem
+Requires(pre): filesystem
 
 %description
 The setup package contains a set of important system configuration and
@@ -25,7 +25,7 @@ cp %{SOURCE1001} .
 
 %check
 # Run any sanity checks.
-#make check
+make check
 
 %install
 rm -rf %{buildroot}
@@ -47,45 +47,23 @@ rm -f %{buildroot}/etc/Makefile
 rm -f %{buildroot}/etc/serviceslint
 rm -f %{buildroot}/etc/uidgidlint
 rm -f %{buildroot}/etc/shadowconvert.sh
-rm -f %{buildroot}/etc/setup.spec
 rm -rf %{buildroot}/etc/packaging
 
-#mkdir -p %{buildroot}/opt/etc
-#mv %{buildroot}/etc/{passwd,group,shadow,gshadow} %{buildroot}/opt/etc
-pushd %{buildroot}/etc
-rm -f passwd shadow group gshadow
-#ln -s ../opt/etc/passwd
-#ln -s ../opt/etc/shadow
-#ln -s ../opt/etc/group
-#ln -s ../opt/etc/gshadow
-popd
-
-%clean
-rm -rf %{buildroot}
 
 #throw away useless and dangerous update stuff until rpm will be able to
 #handle it ( http://rpm.org/ticket/6 )
-#%post -p <lua>
-#for i, name in ipairs({"passwd", "shadow", "group", "gshadow"}) do
-#     os.remove("/etc/"..name..".rpmnew")
-#end
+%post -p <lua>
+for i, name in ipairs({"passwd", "shadow", "group", "gshadow"}) do
+     os.remove("/etc/"..name..".rpmnew")
+end
 
 %files
 %manifest setup.manifest
 %defattr(-,root,root,-)
-#/etc/passwd
-#/etc/group
-#/etc/shadow
-#/etc/gshadow
-#%config(noreplace) /opt/etc/passwd
-#%config(noreplace) /opt/etc/group
-#%config(noreplace,missingok) /opt/etc/shadow
-#%config(noreplace,missingok) /opt/etc/gshadow
-
-#%verify(not md5 size mtime) %config(noreplace) /opt/etc/passwd
-#%verify(not md5 size mtime) %config(noreplace) /opt/etc/group
-#%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) /opt/etc/shadow
-#%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) /opt/etc/gshadow
+%verify(not md5 size mtime) %config(noreplace) /etc/passwd
+%verify(not md5 size mtime) %config(noreplace) /etc/group
+%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) /etc/shadow
+%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) /etc/gshadow
 %verify(not md5 size mtime) %config(noreplace) /etc/services
 %verify(not md5 size mtime) %config(noreplace) /etc/exports
 %config(noreplace) /etc/aliases
