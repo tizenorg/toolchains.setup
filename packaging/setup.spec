@@ -1,14 +1,14 @@
-Summary: A set of system configuration and setup files
-Name: setup
-Version: 0.4
-Release: 1
-License: Public Domain
-Group: System/Base
-URL: https://fedorahosted.org/setup/
-Source0: %{name}-%{version}.tar.bz2
-Source1001: packaging/setup.manifest 
-BuildArch: noarch
-BuildRequires: bash
+Name:           setup
+Version:        0.5
+Release:        1
+License:        Public Domain
+Summary:        A set of system configuration and setup files
+Url:            https://fedorahosted.org/setup/
+Group:          System/Base
+Source0:        %{name}-%{version}.tar.bz2
+Source1001:     packaging/setup.manifest
+BuildRequires:  bash
+BuildArch:      noarch
 Requires(pre): filesystem
 
 %description
@@ -16,7 +16,7 @@ The setup package contains a set of important system configuration and
 setup files, such as passwd, group, and profile.
 
 %prep
-%setup -q 
+%setup -q
 
 ./shadowconvert.sh
 
@@ -28,26 +28,26 @@ cp %{SOURCE1001} .
 make check
 
 %install
-rm -rf %{buildroot}
-mkdir -p %{buildroot}/etc/profile.d
+mkdir -p %{buildroot}%{_sysconfdir}/profile.d
 cp -ar * %{buildroot}/etc
-rm -f %{buildroot}/etc/uidgid
-rm -f %{buildroot}/etc/COPYING
-mkdir -p %{buildroot}/var/log
-touch %{buildroot}/var/log/lastlog
-touch %{buildroot}/etc/environment
-chmod 0644 %{buildroot}/etc/environment
-chmod 0400 %{buildroot}/etc/{shadow,gshadow}
-chmod 0644 %{buildroot}/var/log/lastlog
-touch %{buildroot}/etc/fstab
-touch %{buildroot}/etc/mtab
+rm -f %{buildroot}%{_sysconfdir}/uidgid
+rm -f %{buildroot}%{_sysconfdir}/COPYING
+mkdir -p %{buildroot}%{_localstatedir}/log
+touch %{buildroot}%{_localstatedir}/log/lastlog
+touch %{buildroot}%{_sysconfdir}/environment
+chmod 0644 %{buildroot}%{_sysconfdir}/environment
+chmod 0400 %{buildroot}%{_sysconfdir}/{shadow,gshadow}
+chmod 0644 %{buildroot}%{_localstatedir}/log/lastlog
+touch %{buildroot}%{_sysconfdir}/fstab
+touch %{buildroot}%{_sysconfdir}/mtab
 
 # remove unpackaged files from the buildroot
-rm -f %{buildroot}/etc/Makefile
-rm -f %{buildroot}/etc/serviceslint
-rm -f %{buildroot}/etc/uidgidlint
-rm -f %{buildroot}/etc/shadowconvert.sh
-rm -rf %{buildroot}/etc/packaging
+rm -f %{buildroot}%{_sysconfdir}/Makefile
+rm -f %{buildroot}%{_sysconfdir}/serviceslint
+rm -f %{buildroot}%{_sysconfdir}/uidgidlint
+rm -f %{buildroot}%{_sysconfdir}/shadowconvert.sh
+rm -rf %{buildroot}%{_sysconfdir}/packaging
+rm -rf %{buildroot}%{_sysconfdir}/*.manifest
 
 
 #throw away useless and dangerous update stuff until rpm will be able to
@@ -58,32 +58,31 @@ for i, name in ipairs({"passwd", "shadow", "group", "gshadow"}) do
 end
 
 %files
-%manifest /etc/setup.manifest
-%defattr(-,root,root,-)
-%verify(not md5 size mtime) %config(noreplace) /etc/passwd
-%verify(not md5 size mtime) %config(noreplace) /etc/group
-%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) /etc/shadow
-%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) /etc/gshadow
-%verify(not md5 size mtime) %config(noreplace) /etc/services
-%verify(not md5 size mtime) %config(noreplace) /etc/exports
-%config(noreplace) /etc/aliases
-%config(noreplace) /etc/environment
-%config(noreplace) /etc/filesystems
-%config(noreplace) /etc/host.conf
-%verify(not md5 size mtime) %config(noreplace) /etc/hosts
-%verify(not md5 size mtime) %config(noreplace) /etc/hosts.allow
-%verify(not md5 size mtime) %config(noreplace) /etc/hosts.deny
-%verify(not md5 size mtime) %config(noreplace) /etc/motd
-%config(noreplace) /etc/printcap
-%verify(not md5 size mtime) %config(noreplace) /etc/inputrc
-%config(noreplace) /etc/bashrc
-%config(noreplace) /etc/profile
-%verify(not md5 size mtime) %config(noreplace) /etc/protocols
-%attr(0600,root,root) %config(noreplace,missingok) /etc/securetty
-%config(noreplace) /etc/csh.login
-%config(noreplace) /etc/csh.cshrc
-%dir /etc/profile.d
-%config(noreplace) %verify(not md5 size mtime) /etc/shells
-%ghost %attr(0644,root,root) %verify(not md5 size mtime) /var/log/lastlog
-%ghost %verify(not md5 size mtime) %config(noreplace,missingok) /etc/fstab
-%ghost %verify(not md5 size mtime) %config(noreplace,missingok) /etc/mtab
+%manifest setup.manifest
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/passwd
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/group
+%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) %{_sysconfdir}/shadow
+%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) %{_sysconfdir}/gshadow
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/services
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/exports
+%config(noreplace) %{_sysconfdir}/aliases
+%config(noreplace) %{_sysconfdir}/environment
+%config(noreplace) %{_sysconfdir}/filesystems
+%config(noreplace) %{_sysconfdir}/host.conf
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts.allow
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/hosts.deny
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/motd
+%config(noreplace) %{_sysconfdir}/printcap
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/inputrc
+%config(noreplace) %{_sysconfdir}/bashrc
+%config(noreplace) %{_sysconfdir}/profile
+%verify(not md5 size mtime) %config(noreplace) %{_sysconfdir}/protocols
+%attr(0600,root,root) %config(noreplace,missingok) %{_sysconfdir}/securetty
+%config(noreplace) %{_sysconfdir}/csh.login
+%config(noreplace) %{_sysconfdir}/csh.cshrc
+%dir %{_sysconfdir}/profile.d
+%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/shells
+%ghost %attr(0644,root,root) %verify(not md5 size mtime) %{_localstatedir}/log/lastlog
+%ghost %verify(not md5 size mtime) %config(noreplace,missingok) %{_sysconfdir}/fstab
+%ghost %verify(not md5 size mtime) %config(noreplace,missingok) %{_sysconfdir}/mtab
