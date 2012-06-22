@@ -1,3 +1,7 @@
+* Fri Jun 22 2012 Patrick McCarty <patrick.mccarty@linux.intel.com> 4ed6e36
+- Fix dbus uid in /etc/passwd as well
+- Change dbus home dir to the standard location (/)
+
 * Fri Jun 22 2012 Anas Nashif <anas.nashif@intel.com> 0421ecd
 - dbus user has uid 81
 
