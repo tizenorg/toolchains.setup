@@ -35,9 +35,9 @@ plugdev:*:46:
 staff:*:50:
 games:*:60:
 man:*:62:
+dbus:!:81:
 users:*:100:
 ntp:*:102:
-dbus:!:103:
 ntp:!:104:
 nogroup:*:65534:
 app:x:5000:

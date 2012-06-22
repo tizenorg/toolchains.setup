@@ -1,3 +1,9 @@
+* Fri Jun 22 2012 Anas Nashif <anas.nashif@intel.com> 0421ecd
+- dbus user has uid 81
+
+* Thu Jun 21 2012 Anas Nashif <anas.nashif@intel.com> f0685b6
+- remove manifest file from /etc release 0.5
+
 * Thu Jun 21 2012 Anas Nashif <anas.nashif@intel.com> aadc3b9
 - release 0.5
 - remove manifest file from /etc
