@@ -1,3 +1,7 @@
+* Mon Jul 30 2012 William Douglas <william.douglas@intel.com> dad783d
+[ William Douglas ]
+- Enable tty for lunchbox debugging.
+
 * Fri Jun 22 2012 Patrick McCarty <patrick.mccarty@linux.intel.com> 4ed6e36
 - Fix dbus uid in /etc/passwd as well
 - Change dbus home dir to the standard location (/)
