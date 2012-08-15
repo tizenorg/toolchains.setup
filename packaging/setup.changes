@@ -1,3 +1,6 @@
+* Wed Aug 15 2012 William Douglas <william.douglas@intel.com> 4c25888
+- Revert enabling ttySAC2 by default.
+
 * Mon Jul 30 2012 William Douglas <william.douglas@intel.com> dad783d
 [ William Douglas ]
 - Enable tty for lunchbox debugging.
