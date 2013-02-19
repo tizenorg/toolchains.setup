@@ -1,17 +1,16 @@
 # /etc/protocols:
-# $Id: protocols,v 1.9 2009/09/29 15:11:55 ovasik Exp $
+# $Id: protocols,v 1.1.1.1 2007/05/21 11:30:37 khoonk Exp $
 #
 # Internet (IP) protocols
 #
 #	from: @(#)protocols	5.1 (Berkeley) 4/17/89
 #
 # Updated for NetBSD based on RFC 1340, Assigned Numbers (July 1992).
-# Last IANA update included dated 2009-06-18
 #
-# See also http://www.iana.org/assignments/protocol-numbers
+# See also http://www.isi.edu/in-notes/iana/assignments/protocol-numbers
 
 ip	0	IP		# internet protocol, pseudo protocol number
-hopopt	0	HOPOPT		# hop-by-hop options for ipv6
+#hopopt	0	HOPOPT		# hop-by-hop options for ipv6
 icmp	1	ICMP		# internet control message protocol
 igmp	2	IGMP		# internet group management protocol
 ggp	3	GGP		# gateway-gateway protocol
@@ -44,7 +43,7 @@ iso-tp4	29	ISO-TP4		# ISO Transport Protocol Class 4
 netblt	30	NETBLT		# Bulk Data Transfer Protocol
 mfe-nsp	31	MFE-NSP		# MFE Network Services Protocol
 merit-inp	32	MERIT-INP	# MERIT Internodal Protocol
-dccp	33	DCCP		# Datagram Congestion Control Protocol
+sep	33	SEP		# Sequential Exchange Protocol
 3pc	34	3PC		# Third Party Connect Protocol
 idpr	35	IDPR		# Inter-Domain Policy Routing Protocol
 xtp	36	XTP		# Xpress Tranfer Protocol
@@ -54,17 +53,15 @@ tp++	39	TP++		# TP++ Transport Protocol
 il	40	IL		# IL Transport Protocol
 ipv6	41	IPv6		# IPv6
 sdrp	42	SDRP		# Source Demand Routing Protocol
-ipv6-route	43	IPv6-Route	# Routing Header for IPv6
+ipv6-route	43	IPv6-Route 	# Routing Header for IPv6
 ipv6-frag	44	IPv6-Frag	# Fragment Header for IPv6
 idrp	45	IDRP		# Inter-Domain Routing Protocol
 rsvp	46	RSVP		# Resource ReSerVation Protocol
 gre	47	GRE		# Generic Routing Encapsulation
-dsr	48	DSR		# Dynamic Source Routing Protocol
+mhrp	48	MHRP		# Mobile Host Routing Protocol
 bna	49	BNA		# BNA
-esp	50	ESP		# Encap Security Payload
-ipv6-crypt	50	IPv6-Crypt	# Encryption Header for IPv6 (not in official list)
-ah	51	AH		# Authentication Header
-ipv6-auth	51	IPv6-Auth	# Authentication Header for IPv6 (not in official list)
+ipv6-crypt	50	IPv6-Crypt	# Encryption Header for IPv6
+ipv6-auth	51	IPv6-Auth	# Authentication Header for IPv6
 i-nlsp	52	I-NLSP		# Integrated Net Layer Security TUBA
 swipe	53	SWIPE		# IP with Encryption
 narp	54	NARP		# NBMA Address Resolution Protocol
@@ -131,7 +128,7 @@ pgm	113	PGM		# PGM Reliable Transport Protocol
 l2tp	115	L2TP		# Layer Two Tunneling Protocol
 ddx	116	DDX		# D-II Data Exchange
 iatp	117	IATP		# Interactive Agent Transfer Protocol
-stp	118	STP		# Schedule Transfer
+st	118	ST		# Schedule Transfer
 srp	119	SRP		# SpectraLink Radio Protocol
 uti	120	UTI		# UTI
 smp	121	SMP		# Simple Message Protocol
@@ -147,14 +144,5 @@ sps	130	SPS		# Secure Packet Shield
 pipe	131	PIPE		# Private IP Encapsulation within IP
 sctp	132	SCTP		# Stream Control Transmission Protocol
 fc	133	FC		# Fibre Channel
-rsvp-e2e-ignore	134	RSVP-E2E-IGNORE
-#	135			# Mobility Header
-udplite	136	UDPLite
-mpls-in-ip	137	MPLS-in-IP
-manet	138	manet		# MANET Protocols  [RFC5498]
-hip	139	HIP		# Host Identity Protocol
-shim6	140	Shim6		#Shim6 Protocol                         [RFC5533]
-#   141-252 Unassigned                                       [IANA]
-#   253     Use for experimentation and testing           [RFC3692]
-#   254     Use for experimentation and testing           [RFC3692]
-#   255                 Reserved                             [IANA]
+#	134-254			# Unassigned
+#	255			# Reserved
