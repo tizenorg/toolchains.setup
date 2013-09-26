@@ -58,6 +58,10 @@ rm -f passwd shadow group gshadow
 #ln -s ../opt/etc/gshadow
 popd
 
+# Tizen SDK license
+mkdir -p %{buildroot}/usr/share/license
+cp COPYING %{buildroot}/usr/share/license/%{name}
+
 %clean
 rm -rf %{buildroot}
 
@@ -106,3 +110,4 @@ rm -rf %{buildroot}
 %ghost %attr(0644,root,root) %verify(not md5 size mtime) /var/log/lastlog
 %ghost %verify(not md5 size mtime) %config(noreplace,missingok) /etc/fstab
 %ghost %verify(not md5 size mtime) %config(noreplace,missingok) /etc/mtab
+/usr/share/license/%{name}
