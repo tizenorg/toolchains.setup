@@ -1,0 +1,26 @@
+From 069db1ebb786d75813112d08e9979940a799f7ca Mon Sep 17 00:00:00 2001
+From: "walyong.cho" <walyong.cho@samsung.com>
+Date: Thu, 17 Jan 2013 12:09:37 +0900
+Subject: [PATCH] Prevent marking shadow at passwd, group.
+
+Change-Id: Ife51362b8e38fe5bedfef545a90bfc112177d29e
+---
+ shadowconvert.sh |    3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/shadowconvert.sh b/shadowconvert.sh
+index 4be13b6..006046d 100755
+--- a/shadowconvert.sh
++++ b/shadowconvert.sh
+@@ -11,8 +11,5 @@ sed -e "s/:.*/:*:`expr $(date +%s) / 86400`:0:99999:7:::/" passwd >shadow
+ #make prototype for /etc/gshadow
+ sed -e 's/:[0-9]\+:/::/g' group >gshadow
+ 
+-#mark passwd and group files entries shadowed
+-sed -i -e 's/^\([^:]\+\):[^:]*:/\1:x:/' passwd group
+-
+ echo Converted successfully.
+ exit 0
+-- 
+1.7.9.5
+
