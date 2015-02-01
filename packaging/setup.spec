@@ -6,7 +6,6 @@ License: Public Domain
 Group: System/Base
 URL: https://fedorahosted.org/setup/
 Source0: https://fedorahosted.org/releases/s/e/%{name}/%{name}-0.1.tar.bz2
-Patch101: 0001-Prevent-marking-shadow-at-passwd-group.patch
 BuildArch: noarch
 BuildRequires: bash
 Requires: filesystem
@@ -17,7 +16,6 @@ setup files, such as passwd, group, and profile.
 
 %prep
 %setup -q 
-%patch101 -p1
 ./shadowconvert.sh
 
 %build
@@ -50,18 +48,8 @@ rm -f %{buildroot}/etc/setup.spec
 rm -rf %{buildroot}/etc/packaging
 
 mkdir -p %{buildroot}/opt/etc
-#mv %{buildroot}/etc/{passwd,group,shadow,gshadow} %{buildroot}/opt/etc
-%if "%{_repository}" == "wearable"
-mv %{buildroot}/etc/{passwd,group} %{buildroot}/opt/etc
-%endif
 pushd %{buildroot}/etc
-rm -f passwd shadow group gshadow
-%if "%{_repository}" == "wearable"
-ln -s ../opt/etc/passwd
-#ln -s ../opt/etc/shadow
-ln -s ../opt/etc/group
-#ln -s ../opt/etc/gshadow
-%endif
+rm -f shadow gshadow
 popd
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/license
 cat COPYING > $RPM_BUILD_ROOT%{_datadir}/license/setup
@@ -79,25 +67,11 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{_datadir}/license/setup
-%if "%{_repository}" == "wearable"
-/etc/passwd
-/etc/group
-%endif
+%verify(not md5 size mtime) %config(noreplace) /etc/passwd
+%verify(not md5 size mtime) %config(noreplace) /etc/group
 #/etc/shadow
 #/etc/gshadow
-%if "%{_repository}" == "wearable"
-%config(noreplace) /opt/etc/passwd
-%config(noreplace) /opt/etc/group
-%endif
-#%config(noreplace,missingok) /opt/etc/shadow
-#%config(noreplace,missingok) /opt/etc/gshadow
 
-%if "%{_repository}" == "wearable"
-%verify(not md5 size mtime) %config(noreplace) /opt/etc/passwd
-%verify(not md5 size mtime) %config(noreplace) /opt/etc/group
-%endif
-#%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) /opt/etc/shadow
-#%verify(not md5 size mtime) %attr(0000,root,root) %config(noreplace,missingok) /opt/etc/gshadow
 %verify(not md5 size mtime) %config(noreplace) /etc/services
 %verify(not md5 size mtime) %config(noreplace) /etc/exports
 %config(noreplace) /etc/aliases

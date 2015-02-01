@@ -12,7 +12,7 @@ uucp:*:10:
 man:*:12:
 proxy:*:13:
 kmem:*:15:
-dialout:*:20:app
+dialout:*:20:app,pulse
 fax:*:21:
 voice:*:22:
 cdrom:*:24:
@@ -132,7 +132,7 @@ crash:x:6828:app,system,media,developer,pulse
 system:x:1000:
 bluetooth:x:1002:
 graphics:x:1003:
-input:x:1004:developer
+input:x:1004:developer,app
 log:x:1007:
 compass:x:1008:
 mount:x:1009:
@@ -154,3 +154,4 @@ net_raw:x:3004:
 net_admin:x:3005:
 misc:x:9998:
 systemd-journal:x:190:
+libvirt:x:191:
