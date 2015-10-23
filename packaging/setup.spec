@@ -1,8 +1,8 @@
 Summary: A set of system configuration and setup files
 Name: setup
-Version: 0.1
-Release: 4
-License: Public Domain
+Version: 0.2
+Release: 1
+License: Apache-2.0
 Group: System/Base
 URL: https://fedorahosted.org/setup/
 Source0: https://fedorahosted.org/releases/s/e/%{name}/%{name}-0.1.tar.bz2
@@ -15,7 +15,7 @@ The setup package contains a set of important system configuration and
 setup files, such as passwd, group, and profile.
 
 %prep
-%setup -q 
+%setup -q
 ./shadowconvert.sh
 
 %build
@@ -29,7 +29,6 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/etc/profile.d
 cp -ar * %{buildroot}/etc
 rm -f %{buildroot}/etc/uidgid
-rm -f %{buildroot}/etc/COPYING
 mkdir -p %{buildroot}/var/log
 touch %{buildroot}/var/log/lastlog
 touch %{buildroot}/etc/environment
@@ -52,7 +51,8 @@ pushd %{buildroot}/etc
 rm -f shadow gshadow
 popd
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/license
-cat COPYING > $RPM_BUILD_ROOT%{_datadir}/license/setup
+cp LICENSE.Apache-2.0 $RPM_BUILD_ROOT%{_datadir}/license/%{name}
+rm -f $RPM_BUILD_ROOT/etc/LICENSE.Apache-2.0
 
 %clean
 rm -rf %{buildroot}
@@ -95,3 +95,20 @@ rm -rf %{buildroot}
 %ghost %attr(0644,root,root) %verify(not md5 size mtime) /var/log/lastlog
 %ghost %verify(not md5 size mtime) %config(noreplace,missingok) /etc/fstab
 %ghost %verify(not md5 size mtime) %config(noreplace,missingok) /etc/mtab
+%changelog
+* Fri Mar 20 2015 WaLyong Cho <walyong.cho@samsung.com> - None
+- PROJECT: external/setup
+- COMMIT_ID: 7e34f70170d6e9384cff8dba5702b4f65e6d81bc
+- BRANCH: master
+- PATCHSET_REVISION: 7e34f70170d6e9384cff8dba5702b4f65e6d81bc
+- CHANGE_OWNER: \"WaLyong Cho\" <walyong.cho@samsung.com>
+- PATCHSET_UPLOADER: \"WaLyong Cho\" <walyong.cho@samsung.com>
+- CHANGE_URL: http://slp-info.sec.samsung.net/gerrit/2529307
+- PATCHSET_REVISION: 7e34f70170d6e9384cff8dba5702b4f65e6d81bc
+- TAGGER: WaLyong Cho <walyong.cho@samsung.com>
+- Gerrit patchset approval info:
+- WaLyong Cho <walyong.cho@samsung.com> Verified : 1
+- Kyungmin Park <kyungmin.park@samsung.com> Code-Review : 2
+- Kyungmin Park <kyungmin.park@samsung.com> Verified : 1
+- CHANGE_SUBJECT: Merge remote-tracking branch 'origin/devel/systemfw/master'
+- Merge remote-tracking branch 'origin/devel/systemfw/master'
